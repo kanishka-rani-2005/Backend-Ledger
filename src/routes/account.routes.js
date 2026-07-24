@@ -12,5 +12,13 @@ const accController=require("../controllers/acc.controller")
  */
 router.post('/',authMiddleware.authMiddleware,accController.createAccountContoller)
 
+router.get('/',authMiddleware.authMiddleware,accController.getUserAccountsController)
+
+/**
+ * @route /api/accounts/balance/:accountId
+ * @description find balance per account
+ * @protected
+ */
+router.get('/balance/:accountId',authMiddleware.authMiddleware,accController.getAccountBalanceController)
 
 module.exports=router

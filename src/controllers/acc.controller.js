@@ -15,4 +15,37 @@ async function createAccountContoller(req,res){
     await emailService.accountCreationSucessfully(user.email,user.name)
 }
 
-module.exports={createAccountContoller}
+async function getUserAccountsController(req,res){
+    const accounts=await accModel.find({user:req.user._id})
+
+    res.status(200).json({
+        message:"Account fetched successfully",
+        accounts
+    })
+}
+
+async function getAccountBalanceController(req,res){
+    const {accountId}=req.params
+
+    const acc=await accModel.findOne({
+        _id:accountId,
+        user:req.user._id
+    })
+
+    if(!acc){
+        res.status(500).json({
+            message:"Account not found",
+        })
+    }
+
+    const balance=await acc.getBalance()
+
+    return res.status(200).json({
+        accountId:acc._id,
+        balance:balance
+    })
+}
+
+
+
+module.exports={createAccountContoller,getUserAccountsController,getAccountBalanceController}
