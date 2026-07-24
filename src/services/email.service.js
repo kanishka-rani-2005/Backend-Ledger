@@ -43,7 +43,15 @@ const sendEmail = async (to, subject, text, html) => {
 async function sendRegistrationEmail(userEmail, name) {
     const subject = 'Welcome to Backend Ledger!';
     const text = `Hello ${name},\n\nThank you for registering at Backend Ledger. We're excited to have you on board!\n\nBest regards,\nThe Backend Ledger Team`;
-    const html = `<p>Hello ${name},</p><p>Thank you for registering at Backend Ledger. We're excited to have you on board!</p><p>Best regards,<br>The Backend Ledger Team</p>`;
+    const html = `<h>Hello ${name},</h><p>Thank you for registering at Backend Ledger. We're excited to have you on board!</p><p>Best regards,<br>The Backend Ledger Team</p>`;
+
+    await sendEmail(userEmail, subject, text, html);
+}
+
+async function accountCreationSucessfully(userEmail, name) {
+    const subject = 'Welcome to Backend Ledger!';
+    const text = `Hello ${name},\n\nThank you for creating an account at Backend Ledger. Next Step is to make your first transaction \n\nBest regards,\nThe Backend Ledger Team`;
+    const html = `<h>Hello ${name},</h><p>Thank you for creating an account at Backend Ledger. </p><p> Next Step is to make your first transaction.</p><p> Best regards,<br>The Backend Ledger Team</p>`;
 
     await sendEmail(userEmail, subject, text, html);
 }
@@ -66,6 +74,7 @@ async function sendRegistrationEmail(userEmail, name) {
 
 module.exports = {
     sendRegistrationEmail,
+    accountCreationSucessfully
     // sendTransactionEmail,
     // sendTransactionFailureEmail
 };
