@@ -10,6 +10,11 @@ const app=express()
 app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
+
+app.use("/",(rea,res)=>{
+    res.send("Ledger is up and runnning properly.")
+})
+
 app.use("/api/auth",authRouter)
 app.use("/api/accounts",accRouter)
 app.use('/api/transactions',transactionRoutes)
